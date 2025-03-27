@@ -16,7 +16,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] DynamicJoystick joys;
     private Transform _cameraTransform;
     public Vector3 movement;
-    private Vector3 lastDirection = Vector3.down; // Начальное idle-направление
+    private Vector3 lastDirection = Vector3.up; // Начальное idle-направление
     private Vector3 targetDir;
 
 
@@ -51,7 +51,6 @@ public class CharacterController : MonoBehaviour
             animator.SetBool("isMoving", true);
             lastDirection = movement;
             // Флип спрайта при движении влево
-            spriteRenderer.flipX = movement.x > 0;
         }
         else
         {
@@ -59,7 +58,7 @@ public class CharacterController : MonoBehaviour
         }
 
         // Передаем параметры в Animator для Blend Tree
-        animator.SetFloat("MoveX", Mathf.Abs(movement.x)); // Берем модуль, чтобы работал Blend Tree
+        animator.SetFloat("MoveX", movement.x); // Берем модуль, чтобы работал Blend Tree
         animator.SetFloat("MoveY", movement.y);
         animator.SetFloat("LastX", lastDirection.x);
         animator.SetFloat("LastY", lastDirection.y);
